@@ -101,8 +101,8 @@
     // Check the password
     passwordInput.addEventListener('input', function () {
         if (passwordInput.value === 'secret123') {
-            hiddenContent.style.display = 'block';
-            passwordContainer.style.display = 'none';
+            // Redirect to the secret page when the password is correct
+            window.location.href = 'secret.html';  // This line redirects to the new page
         } else {
             error.textContent = 'Incorrect password. Please try again.';
         }
