@@ -37,7 +37,7 @@
       bottom: 60px;
       left: 200px;
       width: 200px;
-      height: 100px;
+      height: 130px;
       background: rgba(255,255,255,0.9);
       border-radius: 10px;
       padding: 10px;
@@ -61,27 +61,48 @@
       border-radius: 5px;
       cursor: pointer;
     }
+    .links {
+      margin-top: 10px;
+    }
+    .links a {
+      display: block;
+      margin-top: 5px;
+      color: #333;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
   <div class="background">
     <div class="shovel" title="Pick up the shovel"></div>
     <div class="password-area">
-      <form action="secret.html">
-        <input type="password" placeholder="Enter the secret" required />
-        <button type="submit">Enter</button>
-      </form>
+      <input type="password" id="password" placeholder="Enter the secret" required />
+      <button onclick="checkPassword()">Enter</button>
+      <div class="links" id="secretLinks" style="display:none">
+        <a href="overview.html">Overview</a>
+        <a href="characters.html">Characters</a>
+      </div>
     </div>
   </div>
 
   <script>
     const shovel = document.querySelector('.shovel');
     const passwordArea = document.querySelector('.password-area');
+    const secretLinks = document.getElementById('secretLinks');
 
     shovel.addEventListener('click', () => {
       shovel.style.display = 'none';
       passwordArea.style.display = 'block';
     });
+
+    function checkPassword() {
+      const input = document.getElementById('password').value;
+      if (input === 'secret123') {
+        secretLinks.style.display = 'block';
+      } else {
+        alert('Incorrect password!');
+      }
+    }
   </script>
 </body>
 </html>
