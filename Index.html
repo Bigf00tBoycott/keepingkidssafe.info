@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Keeping Kids Safe</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      height: 100%;
+      background-color: #f0f8ff;
+    }
+    .background {
+      background-image: url('https://cdn.pixabay.com/photo/2017/02/24/23/50/playground-2093484_1280.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 100%;
+      width: 100%;
+      position: relative;
+    }
+    .shovel {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      bottom: 100px;
+      left: 50px;
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Shovel_icon.svg/1024px-Shovel_icon.svg.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      cursor: pointer;
+    }
+    .password-area, .tabs-wrapper {
+      position: absolute;
+      bottom: 50px;
+      left: 50px;
+      width: 300px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    .password-area input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    .password-area button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .tabs {
+      display: flex;
+      gap: 10px;
+    }
+    .tab {
+      background: #4caf50;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .tab:hover {
+      background: #388e3c;
+    }
+    .tab-content {
+      margin-top: 15px;
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="background">
+    <div class="shovel" title="Pick up the shovel"></div>
+
+    <div class="password-area" id="passwordBox" style="display:none;">
+      <label>Enter the secret password:</label>
+      <input type="password" id="passwordInput" placeholder="•••••••••" />
+      <button onclick="unlock()">Enter</button>
+    </div>
+
+    <div class="tabs-wrapper" id="tabSection" style="display:none;">
+      <div class="tabs">
+        <div class="tab" onclick="showTab('overview')">Overview</div>
+        <div class="tab" onclick="showTab('characters')">Characters</div>
+      </div>
+      <div id="overview" class="tab-content active">
+        <h2>Overview</h2>
+        <p>Welcome to KeepingKidsSafe.info — your digital playground for building a safer world for children.</p>
+      </div>
+      <div id="characters" class="tab-content">
+        <h2>Characters</h2>
+        <div id="charactersContent">Loading characters...</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const shovel = document.querySelector('.shovel');
+    const passwordBox = document.getElementById('passwordBox');
+    const tabSection = document.getElementById('tabSection');
+
+    shovel.addEventListener('click', () => {
+      shovel.style.display = 'none';
+      passwordBox.style.display = 'block';
+    });
+
+    function unlock() {
+      const pw = document.getElementById('passwordInput').value;
+      if (pw === 'secret123') {
+        passwordBox.style.display = 'none';
+        tabSection.style.display = 'block';
+      } else {
+        alert('Wrong password. Try again.');
+      }
+    }
+
+    function showTab(tabId) {
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(c => c.classList.remove('active'));
+      const tab = document.getElementById(tabId);
+      tab.classList.add('active');
+
+      if (tabId === 'characters') {
+        loadCharacters();
+      }
+    }
+
+    async function loadCharacters() {
+      try {
+        const res = await fetch('characters.html');
+        const text = await res.text();
+        document.getElementById('charactersContent').innerHTML = text;
+      } catch (err) {
+        document.getElementById('charactersContent').innerHTML = 'Failed to load characters.';
+      }
+    }
+  </script>
+</body>
+</html>
