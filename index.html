@@ -1,113 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keeping Kids Safe</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-            background-color: black;
-            font-family: Arial, sans-serif;
-        }
-        .earth {
-            width: 100%;
-            height: 100vh;
-            background: url('https://eoimages.gsfc.nasa.gov/images/imagerecords/154000/154257/newzealand_tmo_20250505_th.jpg') center/cover no-repeat;
-            position: absolute;
-            transition: transform 0.1s ease;
-        }
-        .overlay {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 10px 20px;
-            font-size: 18px;
-        }
-        .password-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            display: none;
-        }
-        .password-input {
-            padding: 10px;
-            font-size: 16px;
-            margin-top: 20px;
-            border: 2px solid #fff;
-            background-color: #333;
-            color: white;
-            border-radius: 5px;
-        }
-        .error {
-            color: red;
-            margin-top: 10px;
-        }
-        .hidden-content {
-            display: none;
-            color: white;
-            text-align: center;
-            margin-top: 20px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keeping Kids Safe</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+    }
+    .background {
+      background-image: url('https://cdn.pixabay.com/photo/2017/02/24/23/50/playground-2093484_1280.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 100%;
+      width: 100%;
+      position: relative;
+    }
+    .shovel {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      bottom: 100px;
+      left: 50px;
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Shovel_icon.svg/1024px-Shovel_icon.svg.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      cursor: pointer;
+    }
+    .password-area {
+      position: absolute;
+      bottom: 60px;
+      left: 200px;
+      width: 200px;
+      height: 100px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 10px;
+      padding: 10px;
+      display: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    .password-area input {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .password-area button {
+      margin-top: 10px;
+      padding: 8px 12px;
+      font-size: 16px;
+      border: none;
+      background-color: #4caf50;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
+  <div class="background">
+    <div class="shovel" title="Pick up the shovel"></div>
+    <div class="password-area">
+      <form action="secret.html">
+        <input type="password" placeholder="Enter the secret" required />
+        <button type="submit">Enter</button>
+      </form>
+    </div>
+  </div>
 
-<div class="earth" id="earth"></div>
+  <script>
+    const shovel = document.querySelector('.shovel');
+    const passwordArea = document.querySelector('.password-area');
 
-<div class="overlay">
-    <p>We’re glad you’re here. To proceed, uncover the secret.</p>
-</div>
-
-<div class="password-container" id="passwordContainer">
-    <input type="password" class="password-input" id="passwordInput" placeholder="Enter the password" />
-    <div id="error" class="error"></div>
-</div>
-
-<div class="hidden-content" id="hiddenContent">
-    <h2>Welcome to the full content of Keeping Kids Safe!</h2>
-    <p>This page is dedicated to the safety and well-being of children. Explore the site to learn more.</p>
-</div>
-
-<script>
-    let earth = document.getElementById('earth');
-    let passwordContainer = document.getElementById('passwordContainer');
-    let hiddenContent = document.getElementById('hiddenContent');
-    let error = document.getElementById('error');
-    let passwordInput = document.getElementById('passwordInput');
-
-    // Mouse tracking for Earth view effect
-    document.addEventListener('mousemove', function (e) {
-        let x = e.clientX / window.innerWidth;
-        let y = e.clientY / window.innerHeight;
-        let rotateX = (y - 0.5) * 20;
-        let rotateY = (x - 0.5) * -20;
-
-        earth.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    shovel.addEventListener('click', () => {
+      shovel.style.display = 'none';
+      passwordArea.style.display = 'block';
     });
-
-    // Show the password input field
-    setTimeout(() => {
-        passwordContainer.style.display = 'block';
-    }, 1000);
-
-    // Check the password
-    passwordInput.addEventListener('input', function () {
-        if (passwordInput.value === 'secret123') {
-            // Redirect to the secret page when the password is correct
-            window.location.href = 'secret.html';  // This line redirects to the new page
-        } else {
-            error.textContent = 'Incorrect password. Please try again.';
-        }
-    });
-</script>
-
+  </script>
 </body>
 </html>
