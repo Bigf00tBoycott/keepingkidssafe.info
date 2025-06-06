@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keeping Kids Safe</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to Keeping Kids Safe</h1>
+    <p>Click the shovel to uncover the secret...</p>
+
+    <div id="sandbox" onclick="revealPassword()">
+      🛠️ Click the shovel
+    </div>
+
+    <div id="passwordArea" style="display: none;">
+      <input type="password" id="passwordInput" placeholder="Enter the secret password" />
+      <button onclick="checkPassword()">Unlock</button>
+    </div>
+  </div>
+
+  <script>
+    function revealPassword() {
+      document.getElementById("passwordArea").style.display = "block";
+    }
+
+    function checkPassword() {
+      const password = document.getElementById("passwordInput").value;
+      if (password === "secret123") {
+        window.location.href = "home.html";
+      } else {
+        alert("Wrong password!");
+      }
+    }
+  </script>
+</body>
+</html>
