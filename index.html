@@ -1,116 +1,76 @@
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>KeepingKidsSafe - Parent Portal</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f9;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background: #005a8d;
-            color: white;
-            padding: 1rem;
-            text-align: center;
-        }
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            background: #e0e0e0;
-            padding: 1rem;
-        }
-        nav a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-        }
-        .content {
-            padding: 2rem;
-            text-align: center;
-        }
-        #secret {
-            margin-top: 2rem;
-            display: none;
-        }
-        #infoContent, #calendarContent {
-            display: none;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>KeepingKidsSafe.info - Parent Portal</h1>
-        <p>Keeping Kids Safe</p>
-    </header>
-    <nav>
-        <a href="#" onclick="showTab('info')">Information</a>
-        <a href="#" onclick="showTab('calendar')">Events & Calendar</a>
-    </nav>
+export default function HomePage() {
+  const [sections, setSections] = useState([
+    { title: "Welcome", content: "This is keepingkidssafe.info" },
+    { title: "Mission", content: "Our mission is to provide clear resources and guidance for child safety." },
+  ]);
 
-    <div class="content">
-        <div id="infoContent">
-            <h2>Welcome</h2>
-            <p>Parent Guide, read safety tips, and learn how to protect your children, their children, our future, from hurt people who want to hurt children.</p>
+  const [newTitle, setNewTitle] = useState("");
+  const [newContent, setNewContent] = useState("");
+
+  const addSection = () => {
+    if (!newTitle || !newContent) return;
+    setSections([...sections, { title: newTitle, content: newContent }]);
+    setNewTitle("");
+    setNewContent("");
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-100 p-6">
+      <h1 className="text-3xl font-bold text-center mb-6">Keeping Kids Safe</h1>
+      <div className="grid md:grid-cols-2 gap-6">
+        {sections.map((section, idx) => (
+          <Card key={idx} className="shadow-lg rounded-2xl">
+            <CardContent>
+              <h2 className="text-xl font-semibold mb-2">{section.title}</h2>
+              <p className="text-gray-700">{section.content}</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <div className="mt-10 p-4 bg-white rounded-2xl shadow-md">
+        <h2 className="text-lg font-bold mb-3">Add New Section</h2>
+        <Input
+          placeholder="Section Title"
+          value={newTitle}
+          onChange={(e) => setNewTitle(e.target.value)}
+          className="mb-2"
+        />
+        <Input
+          placeholder="Section Content"
+          value={newContent}
+          onChange={(e) => setNewContent(e.target.value)}
+          className="mb-2"
+        />
+        <Button onClick={addSection}>Add Section</Button>
+      </div>
+
+      <div className="mt-10 p-4 bg-white rounded-2xl shadow-md max-w-md mx-auto">
+        <h2 className="text-lg font-bold mb-3">Subscribe to our Newsletter</h2>
+        <div id="mc_embed_signup">
+          <form
+            action="https://YOUR-USERNAME.usX.list-manage.com/subscribe/post?u=XXXX&id=XXXX"
+            method="post"
+            target="_blank"
+            noValidate
+            className="flex flex-col"
+          >
+            <Input
+              type="email"
+              name="EMAIL"
+              placeholder="Enter your email"
+              required
+              className="mb-2"
+            />
+            <Button type="submit">Subscribe</Button>
+          </form>
         </div>
-
-        <div id="calendarContent">
-            <h2>Upcoming Events</h2>
-            <ul>
-                <li><strong>June 25th</strong> - Crusade Against CMS(The Bad Guys)</li>
-                <li><strong>July 17th</strong> - 29th Birthday/Lilith is declared </li>
-                <li><strong>Yet To Be Announced</strong> - Divorce/Wedding Date</li>
-            </ul>
-        </div>
-
-        <div id="secret">
-            <p style="font-size: 0.9em; color: gray;">Enter password to unlock hidden resources:</p>
-            <input type="password" id="passwordInput" placeholder="Enter password">
-            <button onclick="checkPassword()">Submit</button>
-        </div>
-
-        <div id="secretContent" style="display:none; margin-top:2rem;">
-            <h2>🎁 Bonus Parent Resources</h2>
-            <p><a href="resources/Parent_Guide_Online_Gaming_Safety.pdf" target="_blank">View Parent Guide (PDF)</a></p>
-            <p>More secure content coming soon...</p>
-        </div>
+      </div>
     </div>
-
-    <script>
-        function showTab(tab) {
-            document.getElementById("infoContent").style.display = "none";
-            document.getElementById("calendarContent").style.display = "none";
-            if (tab === 'info') document.getElementById("infoContent").style.display = "block";
-            else if (tab === 'calendar') document.getElementById("calendarContent").style.display = "block";
-        }
-
-        function checkPassword() {
-            var password = document.getElementById("passwordInput").value;
-            if (password === "donkey2345") {
-                document.getElementById("secretContent").style.display = "block";
-            } else {
-                alert("Incorrect password. Please try again.");
-            }
-        }
-
-        var secretShown = false;
-        var doubleClicked = false;
-        document.addEventListener("dblclick", function(e) {
-            if (e.button === 0) doubleClicked = true;
-        });
-        document.addEventListener("keydown", function(e) {
-            if (!secretShown && doubleClicked && (e.key === "v" || e.key === "V")) {
-                document.getElementById("secret").style.display = "block";
-                secretShown = true;
-            }
-        });
-
-        // Show default tab
-        showTab('info');
-    </script>
-</body>
-</html>
+  );
+}
