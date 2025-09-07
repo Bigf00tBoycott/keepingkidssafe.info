@@ -1,64 +1,77 @@
-
+/* Base styles */
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f4f9;
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #f7f7f7;
+  color: #333;
 }
 
-header {
-    background: #005a8d;
-    color: white;
-    padding: 1rem;
-    text-align: center;
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
 }
 
-nav {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    background: #e0e0e0;
-    padding: 1rem;
-    flex-wrap: wrap;
+p {
+  margin: 0 0 1rem 0;
+  line-height: 1.6;
 }
 
-nav a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
+/* Container */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1rem;
 }
 
-.content {
-    padding: 2rem;
-    text-align: center;
+/* Card */
+.card {
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
-#secret {
-    margin-top: 2rem;
+/* Buttons */
+button, .btn {
+  display: inline-block;
+  background-color: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
 }
 
-#infoContent, #calendarContent {
-    display: none;
+button:hover, .btn:hover {
+  background-color: #1d4ed8;
 }
 
-/* Mobile responsive styles */
-@media (max-width: 600px) {
-    header h1 {
-        font-size: 1.5rem;
-    }
+/* Input */
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
 
-    nav {
-        flex-direction: column;
-        gap: 1rem;
-    }
+input:focus {
+  border-color: #2563eb;
+  outline: none;
+}
 
-    .content {
-        padding: 1rem;
-    }
+/* Newsletter */
+.newsletter {
+  max-width: 400px;
+  margin: 2rem auto;
+  text-align: center;
+}
 
-    input[type="password"], button {
-        width: 90%;
-        margin-top: 0.5rem;
-        font-size: 1rem;
-    }
+.newsletter p {
+  margin-bottom: 1rem;
 }
