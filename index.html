@@ -1,76 +1,257 @@
-import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keeping Kids Safe Online | Protecting Children from Predators</title>
+    <meta name="description" content="A resource for parents and guardians to learn about online dangers, recognize warning signs, and empower children to navigate the digital world safely.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(238, 247, 255, 1) 0%, rgba(224, 239, 254, 1) 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
 
-export default function HomePage() {
-  const [sections, setSections] = useState([
-    { title: "Welcome", content: "This is keepingkidssafe.info" },
-    { title: "Mission", content: "Our mission is to provide clear resources and guidance for child safety." },
-  ]);
-
-  const [newTitle, setNewTitle] = useState("");
-  const [newContent, setNewContent] = useState("");
-
-  const addSection = () => {
-    if (!newTitle || !newContent) return;
-    setSections([...sections, { title: newTitle, content: newContent }]);
-    setNewTitle("");
-    setNewContent("");
-  };
-
-  return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold text-center mb-6">Keeping Kids Safe</h1>
-      <div className="grid md:grid-cols-2 gap-6">
-        {sections.map((section, idx) => (
-          <Card key={idx} className="shadow-lg rounded-2xl">
-            <CardContent>
-              <h2 className="text-xl font-semibold mb-2">{section.title}</h2>
-              <p className="text-gray-700">{section.content}</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
-      <div className="mt-10 p-4 bg-white rounded-2xl shadow-md">
-        <h2 className="text-lg font-bold mb-3">Add New Section</h2>
-        <Input
-          placeholder="Section Title"
-          value={newTitle}
-          onChange={(e) => setNewTitle(e.target.value)}
-          className="mb-2"
-        />
-        <Input
-          placeholder="Section Content"
-          value={newContent}
-          onChange={(e) => setNewContent(e.target.value)}
-          className="mb-2"
-        />
-        <Button onClick={addSection}>Add Section</Button>
-      </div>
-
-      <div className="mt-10 p-4 bg-white rounded-2xl shadow-md max-w-md mx-auto">
-        <h2 className="text-lg font-bold mb-3">Subscribe to our Newsletter</h2>
-        <div id="mc_embed_signup">
-          <form
-            action="https://YOUR-USERNAME.usX.list-manage.com/subscribe/post?u=XXXX&id=XXXX"
-            method="post"
-            target="_blank"
-            noValidate
-            className="flex flex-col"
-          >
-            <Input
-              type="email"
-              name="EMAIL"
-              placeholder="Enter your email"
-              required
-              className="mb-2"
-            />
-            <Button type="submit">Subscribe</Button>
-          </form>
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2">
+                <svg class="h-8 w-8 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008h-.008v-.008z" />
+                </svg>
+                <span class="text-xl font-bold text-gray-800">KeepingKidsSafe.info</span>
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#dangers" class="text-gray-600 hover:text-blue-600 transition duration-300">Online Dangers</a>
+                <a href="#tips" class="text-gray-600 hover:text-blue-600 transition duration-300">Safety Tips</a>
+                <a href="#resources" class="text-gray-600 hover:text-blue-600 transition duration-300">Resources</a>
+                <a href="#about" class="text-gray-600 hover:text-blue-600 transition duration-300">About Us</a>
+            </div>
+            <a href="#footer" class="hidden md:inline-block bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">Contact Us</a>
+            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4 space-y-2">
+            <a href="#dangers" class="block text-gray-600 hover:text-blue-600 transition duration-300">Online Dangers</a>
+            <a href="#tips" class="block text-gray-600 hover:text-blue-600 transition duration-300">Safety Tips</a>
+            <a href="#resources" class="block text-gray-600 hover:text-blue-600 transition duration-300">Resources</a>
+            <a href="#about" class="block text-gray-600 hover:text-blue-600 transition duration-300">About Us</a>
+            <a href="#footer" class="block bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300 text-center mt-2">Contact Us</a>
         </div>
-      </div>
-    </div>
-  );
-}
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-gradient py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">Empowering Parents, Protecting Children.</h1>
+                <p class="mt-6 text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">In the digital age, online safety is paramount. We provide the knowledge and tools you need to protect your children from online predators and other digital threats.</p>
+                <div class="mt-10">
+                    <a href="#tips" class="bg-blue-600 text-white font-bold py-4 px-8 rounded-full text-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105">Discover Safety Tips Now</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold text-gray-800">The Invisible Threat is Real</h2>
+                <div class="w-24 h-1 bg-blue-500 mx-auto mt-4 mb-8 rounded"></div>
+                <p class="text-gray-600 max-w-4xl mx-auto text-lg">
+                    The internet is an incredible tool for learning and connection, but it also harbors hidden dangers. Child predators are sophisticated and use online games, social media, and chat rooms to groom and exploit children. Our mission is to shine a light on these threats and equip you with strategies to keep your family safe.
+                </p>
+            </div>
+        </section>
+
+        <!-- Online Dangers Section -->
+        <section id="dangers" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-800">Recognize the Dangers</h2>
+                    <p class="text-gray-600 mt-2">Awareness is the first step toward protection.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Danger Card 1: Predators -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-red-100 mb-6">
+                            <svg class="h-8 w-8 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Online Predators</h3>
+                        <p class="text-gray-600">Individuals who use the internet to establish emotional connections with children for the purpose of sexual abuse and exploitation. They often hide their true identity and intentions.</p>
+                    </div>
+                    <!-- Danger Card 2: Cyberbullying -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-yellow-100 mb-6">
+                            <svg class="h-8 w-8 text-yellow-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Cyberbullying</h3>
+                        <p class="text-gray-600">The use of digital communication tools to harass, threaten, or humiliate someone. It can happen 24/7 and is often anonymous, causing significant emotional distress.</p>
+                    </div>
+                    <!-- Danger Card 3: Inappropriate Content -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-purple-100 mb-6">
+                            <svg class="h-8 w-8 text-purple-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Inappropriate Content</h3>
+                        <p class="text-gray-600">Exposure to violent, pornographic, or hateful material that is not age-appropriate and can be harmful to a child's psychological development.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Safety Tips Section -->
+        <section id="tips" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-800">Practical Safety Tips</h2>
+                    <p class="text-gray-600 mt-2">Simple steps can make a world of difference.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+                    <!-- Tip Item -->
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600">
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-1">Communicate Openly</h4>
+                            <p class="text-gray-600">Create a safe space for your child to talk about their online experiences without fear of judgment or punishment. Ask them about the games and apps they use.</p>
+                        </div>
+                    </div>
+                     <!-- Tip Item -->
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600">
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-1">Set Clear Rules & Boundaries</h4>
+                            <p class="text-gray-600">Establish rules for screen time, websites they can visit, and the kind of information they can share online. Keep computers in a central family area.</p>
+                        </div>
+                    </div>
+                     <!-- Tip Item -->
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600">
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-1">Emphasize Privacy</h4>
+                            <p class="text-gray-600">Teach children never to share personal information like their full name, address, phone number, school name, or passwords online.</p>
+                        </div>
+                    </div>
+                     <!-- Tip Item -->
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600">
+                           <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.004 9.004 0 0112 21" /></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-1">Use Parental Controls</h4>
+                            <p class="text-gray-600">Utilize software and device settings to filter inappropriate content, limit screen time, and monitor online activity. These are helpful tools, but not a substitute for communication.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources" class="py-20">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-800">Trusted Resources</h2>
+                    <p class="text-gray-600 mt-2">You are not alone. These organizations offer expert help.</p>
+                </div>
+                <div class="max-w-4xl mx-auto">
+                    <div class="space-y-4">
+                        <a href="https://www.missingkids.org/NetSmartz" target="_blank" rel="noopener noreferrer" class="block bg-white p-6 rounded-lg shadow-md hover:bg-gray-100 transition-colors duration-300">
+                            <h4 class="text-xl font-bold text-blue-700">NetSmartz Workshop</h4>
+                            <p class="text-gray-600">An interactive educational program from the National Center for Missing & Exploited Children (NCMEC) for children, parents, and educators.</p>
+                        </a>
+                        <a href="https://www.fbi.gov/how-we-can-help-you/safety-resources/protecting-your-kids" target="_blank" rel="noopener noreferrer" class="block bg-white p-6 rounded-lg shadow-md hover:bg-gray-100 transition-colors duration-300">
+                            <h4 class="text-xl font-bold text-blue-700">FBI — Protecting Your Kids</h4>
+                            <p class="text-gray-600">Official resources and guides from the Federal Bureau of Investigation on various aspects of child safety, including online threats.</p>
+                        </a>
+                        <a href="https://www.connectsafely.org/" target="_blank" rel="noopener noreferrer" class="block bg-white p-6 rounded-lg shadow-md hover:bg-gray-100 transition-colors duration-300">
+                            <h4 class="text-xl font-bold text-blue-700">ConnectSafely</h4>
+                            <p class="text-gray-600">A nonprofit organization dedicated to educating users of connected technology about safety, privacy, and security.</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="py-20 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                 <h2 class="text-3xl font-bold text-gray-800">Our Mission</h2>
+                 <div class="w-24 h-1 bg-blue-500 mx-auto mt-4 mb-8 rounded"></div>
+                 <p class="text-gray-600 max-w-4xl mx-auto text-lg">
+                    KeepingKidsSafe.info is a dedicated initiative committed to raising awareness about the dangers children face online. We believe that education is the most powerful tool in preventing exploitation. We strive to provide clear, accessible, and actionable information to help parents and guardians create a safer digital environment for the next generation.
+                 </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-gray-800 text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+                <div>
+                    <h3 class="text-lg font-bold mb-4">KeepingKidsSafe.info</h3>
+                    <p class="text-gray-400">Your partner in navigating the complexities of online child safety.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#dangers" class="text-gray-400 hover:text-white">Dangers</a></li>
+                        <li><a href="#tips" class="text-gray-400 hover:text-white">Safety Tips</a></li>
+                        <li><a href="#resources" class="text-gray-400 hover:text-white">Resources</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact & Disclaimer</h3>
+                    <p class="text-gray-400">contact@keepingkidssafe.info</p>
+                    <p class="text-xs text-gray-500 mt-4">This website provides informational resources and is not a substitute for professional legal advice or law enforcement services. If you suspect a child is in immediate danger, please contact your local police or call 911.</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-10 pt-6 text-center text-gray-500 text-sm">
+                <p>&copy; 2024 KeepingKidsSafe.info. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+
+</body>
+</html>
