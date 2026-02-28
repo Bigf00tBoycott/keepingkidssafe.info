@@ -244,6 +244,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </footer>
 
+
+    <script>
+        // Ensure Cookiebot consent dialog is shown when no prior choice exists
+        window.addEventListener('CookiebotOnConsentReady', function () {
+            if (window.Cookiebot && !window.Cookiebot.hasResponse) {
+                window.Cookiebot.renew();
+            }
+        });
+    </script>
     <script>
         // JavaScript for mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
