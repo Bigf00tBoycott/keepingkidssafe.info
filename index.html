@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-<head> <!-- Google Tag Manager -->
+<head>
+<script
+  id="Cookiebot"
+  src="https://consent.cookiebot.com/uc.js"
+  data-cbid="50907e83-c667-43b0-9fcb-b55c6a4b2b2f"
+  data-blockingmode="auto"
+  type="text/javascript"
+></script>
+<!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -208,12 +216,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
         </section>
     </main>
-    <script id="CookieDeclaration" src="https://consent.cookiebot.com/50907e83-c667-43b0-9fcb-b55c6a4b2b2f/cd.js" type="text/javascript" async></script>
-<script
-  id="CookieDeclaration"
-  src="https://consent.cookiebot.com/50907e83-c667-43b0-9fcb-b55c6a4b2b2f/cd.js"
-  type="text/javascript"
-></script>
     <!-- Footer -->
     <footer id="footer" class="bg-gray-800 text-white">
         <div class="container mx-auto px-6 py-12">
@@ -242,6 +244,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </footer>
 
+
+    <script>
+        // Ensure Cookiebot consent dialog is shown for visitors without a prior choice
+        (function ensureCookiebotBanner() {
+            const start = Date.now();
+            const maxWaitMs = 8000;
+
+            const tryShowBanner = () => {
+                if (window.Cookiebot && typeof window.Cookiebot.hasResponse === 'boolean') {
+                    if (!window.Cookiebot.hasResponse) {
+                        window.Cookiebot.renew();
+                    }
+                    return;
+                }
+
+                if (Date.now() - start < maxWaitMs) {
+                    setTimeout(tryShowBanner, 200);
+                }
+            };
+
+            tryShowBanner();
+        })();
+    </script>
     <script>
         // JavaScript for mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
